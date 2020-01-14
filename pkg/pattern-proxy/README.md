@@ -10,7 +10,3 @@ SendData() - sending new data from a client <br>
 GetData() - returning data to the client
 
 You can test this pattern in main.go
-
-P.S.<br>
-main.go location: ./main.go<br>
-packets location: ./patternProxy/* 

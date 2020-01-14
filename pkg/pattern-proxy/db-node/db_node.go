@@ -1,27 +1,28 @@
 package db_node
 
-import (
-	"github.com/solympe/Golang_Training/pkg/pattern-proxy/db-functions"
-)
+type dataBaseNodeController interface {
+	GetData() string
+	SendData(data string)
+}
 
 type dbNode struct {
-	cache    db_functions.DBFunctions
-	dataBase db_functions.DBFunctions
+	cache    dataBaseNodeController
+	dataBase dataBaseNodeController
 }
 
 // SendData updates data in the main data-base and cache
 func (n *dbNode) SendData(data string) {
-	db_functions.DBFunctions.SendData(n.cache, data)
-	db_functions.DBFunctions.SendData(n.dataBase, data)
+	dataBaseNodeController.SendData(n.cache, data)
+	dataBaseNodeController.SendData(n.dataBase, data)
 }
 
 // GetData returns 'fresh' data from cache
 func (n dbNode) GetData() string {
-	freshData := db_functions.DBFunctions.GetData(n.cache)
+	freshData := dataBaseNodeController.GetData(n.cache)
 	return freshData
 }
 
-// NewDBNode returns new instance of dataBaseNode(proxy)
-func NewDBNode(cache db_functions.DBFunctions, db db_functions.DBFunctions) db_functions.DBFunctions {
+// NewDataBaseNodeController returns new instance of proxy
+func NewDataBaseNodeController(cache dataBaseNodeController, db dataBaseNodeController) dataBaseNodeController {
 	return &dbNode{cache, db}
 }

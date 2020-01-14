@@ -9,9 +9,9 @@ import (
 )
 
 func main() {
-	var cache = c.NewCache()
-	var dataBaseOrig = db.NewDB(cache)
-	var dataBaseNode = dbn.NewDBNode(cache, dataBaseOrig)
+	var cache = c.NewCacheController()
+	var dataBaseOrig = db.NewDataBaseController(cache)
+	var dataBaseNode = dbn.NewDataBaseNodeController(cache, dataBaseOrig)
 
 	dataBaseOrig.SendData("new data")
 	fmt.Println(dataBaseNode.GetData(), "=", dataBaseOrig.GetData())
